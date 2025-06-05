@@ -39,7 +39,7 @@ const Footer = () => {
         >
           GitHub Repository
         </a>
-        <a className="link link-hover" href="mailto:your@email.com">
+        <a className="link link-hover" href="mailto:faiz4121820@gmail.com">
           Contact Me
         </a>
       </nav>

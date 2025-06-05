@@ -19,7 +19,12 @@ const Login = () => {
         navigate(`${location.state ? location.state : "/"}`);
         toast.success("User Login Successfully");
       })
-      .catch((err) => toast.error(err.code));
+      .catch((err) => {
+        if (err.code == "auth/invalid-credential") {
+          return toast.error("Invalid Email or Password");
+        }
+        toast.error(err.code);
+      });
   };
 
   const handleGoogleSignIn = () => {

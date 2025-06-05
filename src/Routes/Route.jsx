@@ -3,6 +3,10 @@ import Root from "../Root/Root";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import AllArtifacts from "../Pages/AllArtifacts";
+import AddArtifacts from "../Pages/AddArtifacts";
+import MyArtifacts from "../Pages/MyArtifacts";
+import LikedArtifacts from "../Pages/LikedArtifacts";
 
 export const router = createBrowserRouter([
   {
@@ -15,11 +19,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/allArtifacts",
-        element: <h1>all artifacts</h1>,
+        Component: AllArtifacts,
       },
       {
         path: "/addArtifacts",
-        element: <h1>add artifacts</h1>,
+        Component: AddArtifacts,
+      },
+      {
+        path: "/myArtifacts",
+        Component: MyArtifacts,
+      },
+      {
+        path: "/likedArtifacts",
+        Component: LikedArtifacts,
       },
       {
         path: "/login",

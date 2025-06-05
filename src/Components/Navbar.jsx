@@ -93,9 +93,21 @@ const Navbar = () => {
               </button>
 
               {showUserMenu && (
-                <div className="absolute right-0 mt-2 w-48 bg-base-100 border border-gray-200 rounded-lg shadow-md p-4 z-50">
-                  <div className="text-sm font-semibold mb-2">
+                <div className="absolute right-0 w-48 bg-base-100 border border-gray-200 rounded-lg shadow-md p-4 z-50 space-y-4">
+                  <div className="text-sm font-semibold">
                     {user.displayName}
+                  </div>
+                  <div
+                    onClick={() => setShowUserMenu(false)}
+                    className="text-sm font-semibold"
+                  >
+                    <Link to="/myArtifacts">My Artifacts</Link>
+                  </div>
+                  <div
+                    onClick={() => setShowUserMenu(false)}
+                    className="text-sm font-semibold"
+                  >
+                    <Link to="/likedArtifacts">Liked Artifacts</Link>
                   </div>
                   <button
                     onClick={() => {
