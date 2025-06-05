@@ -26,6 +26,10 @@ export const router = createBrowserRouter([
         Component: AddArtifacts,
       },
       {
+        path: "/artifactsDetails/:id",
+        element: <h1>details page</h1>,
+      },
+      {
         path: "/myArtifacts",
         Component: MyArtifacts,
       },
