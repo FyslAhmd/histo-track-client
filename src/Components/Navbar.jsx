@@ -27,13 +27,13 @@ const Navbar = () => {
       </NavLink>
       <NavLink
         className="text-base md:text-lg font-medium md:mr-2 p-2"
-        to="/findRoommates"
+        to="/allArtifacts"
       >
         All Artifacts
       </NavLink>
       <NavLink
         className="text-base md:text-lg font-medium md:mr-2 p-2"
-        to="/browseListing"
+        to="/addArtifacts"
       >
         Add Artifacts
       </NavLink>
@@ -79,35 +79,43 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <div className="relative">
-            <button
-              onClick={() => setShowUserMenu(!showUserMenu)}
-              className="focus:outline-none"
-            >
-              <img
-                src={user.photoURL || profilePic}
-                alt="Profile"
-                className="w-10 h-10 rounded-full border border-gray-300 cursor-pointer"
-              />
-            </button>
+          user?.photoURL ? (
+            <div className="relative">
+              <button
+                onClick={() => setShowUserMenu(!showUserMenu)}
+                className="focus:outline-none"
+              >
+                <img
+                  src={user.photoURL}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full border border-gray-300 cursor-pointer"
+                />
+              </button>
 
-            {showUserMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-base-100 border border-gray-200 rounded-lg shadow-md p-4 z-50">
-                <div className="text-sm font-semibold mb-2">
-                  {user.displayName}
+              {showUserMenu && (
+                <div className="absolute right-0 mt-2 w-48 bg-base-100 border border-gray-200 rounded-lg shadow-md p-4 z-50">
+                  <div className="text-sm font-semibold mb-2">
+                    {user.displayName}
+                  </div>
+                  <button
+                    onClick={() => {
+                      logOut();
+                      setShowUserMenu(false);
+                    }}
+                    className="btn btn-sm bg-black text-white w-full"
+                  >
+                    Log Out
+                  </button>
                 </div>
-                <button
-                  onClick={() => {
-                    logOut();
-                    setShowUserMenu(false);
-                  }}
-                  className="btn btn-sm bg-black text-white w-full"
-                >
-                  Log Out
-                </button>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          ) : (
+            <img
+              src={profilePic}
+              alt="Profile"
+              className="w-10 h-10 rounded-full border border-gray-300 cursor-pointer"
+            />
+          )
         ) : (
           <div className="flex gap-2">
             <Link className="btn bg-black text-white" to="/login">
