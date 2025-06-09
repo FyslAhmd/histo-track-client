@@ -10,6 +10,7 @@ const ArtifactsCard = ({ artifact }) => {
     artifactType,
     DiscoveredBy,
     PresentLocation,
+    totalLiked,
   } = artifact;
 
   return (
@@ -38,7 +39,10 @@ const ArtifactsCard = ({ artifact }) => {
           </p>
         </div>
 
-        <div className="card-actions justify-end mt-4">
+        <div className="card-actions mt-4 flex justify-between items-center w-full">
+          <span className="bg-black text-white hover:bg-gray-800 px-6 py-2 rounded-md">
+            {totalLiked} Liked
+          </span>
           <Link to={`/artifactsDetails/${_id}`}>
             <button className="btn bg-black text-white hover:bg-gray-800 px-6 py-2 rounded-md">
               Details
