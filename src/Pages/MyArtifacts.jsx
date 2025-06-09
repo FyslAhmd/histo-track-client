@@ -1,11 +1,114 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router";
+import LoadingThreeDotsJumping from "../Components/LoadingThreeDotsJumping";
+import { use } from "react";
+import AuthContext from "../provider/AuthContext";
+import Swal from "sweetalert2";
 
 const MyArtifacts = () => {
-    return (
-        <div>
-            My Artifacts
+  const { user } = use(AuthContext);
+  const [myArtifacts, setMyArtifacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user) return;
+    axios
+      .get(`http://localhost:5000/myArtifacts?email=${user?.email}`)
+      .then((res) => {
+        setMyArtifacts(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, [user]);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/allArtifacts/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Artifact has been deleted.",
+                icon: "success",
+              });
+              const remainingArtifacts = myArtifacts.filter(
+                (artifact) => artifact._id !== id
+              );
+              setMyArtifacts(remainingArtifacts);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
+
+  if (loading) return <LoadingThreeDotsJumping />;
+
+  return (
+    <div className="overflow-x-auto text-base-content px-4 py-10">
+      <h2 className="text-3xl font-bold text-center mb-6">My Artifacts</h2>
+
+      {myArtifacts.length === 0 ? (
+        <div className="text-center text-gray-600 mt-10">
+          <p className="text-xl font-semibold">No artifacts added yet.</p>
+          <p className="text-gray-500 mt-2">
+            Start contributing by adding artifacts!
+          </p>
         </div>
-    );
+      ) : (
+        <table className="table">
+          <thead>
+            <tr className="text-lg bg-base-200 text-base-content">
+              <th>Artifact Name</th>
+              <th>Type</th>
+              <th>Discovered At</th>
+              <th>Location</th>
+              <th className="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {myArtifacts.map((artifact) => (
+              <tr key={artifact._id}>
+                <td className="font-semibold">{artifact.ArtifactName}</td>
+                <td>{artifact.artifactType}</td>
+                <td>{artifact.DiscoveredAt}</td>
+                <td>{artifact.PresentLocation}</td>
+                <td className="text-center space-x-2">
+                  <Link to={`/update-artifact/${artifact._id}`}>
+                    <button className="btn btn-sm bg-green-700 text-white font-bold">
+                      Update
+                    </button>
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(artifact._id)}
+                    className="btn btn-sm bg-red-700 text-white font-bold"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
 };
 
 export default MyArtifacts;
