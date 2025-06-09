@@ -6,8 +6,9 @@ import Register from "../Pages/Register";
 import AllArtifacts from "../Pages/AllArtifacts";
 import AddArtifacts from "../Pages/AddArtifacts";
 import MyArtifacts from "../Pages/MyArtifacts";
-import LikedArtifacts from "../Pages/LikedArtifacts";
 import LoadingThreeDotsJumping from "../Components/LoadingThreeDotsJumping";
+import ArtifactDetails from "../Pages/ArtifactDetails";
+import LikedArtifacts from "../Pages/LikedArtifacts";
 
 export const router = createBrowserRouter([
   {
@@ -32,7 +33,9 @@ export const router = createBrowserRouter([
       },
       {
         path: "/artifactsDetails/:id",
-        element: <h1>details page</h1>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/artifact/${params.id}`),
+        Component: ArtifactDetails,
       },
       {
         path: "/myArtifacts",

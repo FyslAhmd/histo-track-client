@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router";
 
 const ArtifactsCard = ({ artifact }) => {
@@ -14,12 +15,14 @@ const ArtifactsCard = ({ artifact }) => {
   } = artifact;
 
   return (
-    <div className="card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <motion.div className="card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
       <figure className="overflow-hidden">
-        <img
+        <motion.img
           src={ArtifactImage}
           alt="Artifact"
           className="w-full h-50 object-cover"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
         />
       </figure>
 
@@ -50,7 +53,7 @@ const ArtifactsCard = ({ artifact }) => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
