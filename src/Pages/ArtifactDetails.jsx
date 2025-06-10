@@ -36,8 +36,6 @@ const ArtifactDetails = () => {
 
   useEffect(() => {
     document.title = "HistoTrack | Artifact Details";
-    // if (!user || !artifact)
-    //   return <LoadingThreeDotsJumping></LoadingThreeDotsJumping>;
     window.scrollTo(0, 0);
     if (likedBy.includes(userEmail)) {
       setLikes(true);

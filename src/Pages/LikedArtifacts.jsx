@@ -13,18 +13,29 @@ const LikedArtifacts = () => {
 
   useEffect(() => {
     document.title = "HistoTrack | Liked Artifacts";
-    if (user?.email) {
-      axios
-        .get(`http://localhost:5000/liked-artifacts?email=${user.email}`)
-        .then((res) => {
+
+    const fetchLikedArtifacts = async () => {
+      if (user?.email) {
+        try {
+          const idToken = await user.getIdToken();
+          const res = await axios.get(
+            `http://localhost:5000/liked-artifacts?email=${user.email}`,
+            {
+              headers: {
+                authorization: `Bearer ${idToken}`,
+              },
+            }
+          );
           setLikedArtifacts(res.data);
           setLoading(false);
-        })
-        .catch((err) => {
-          console.error(err);
+        } catch (err) {
+          console.error("Error fetching liked artifacts:", err);
           setLoading(false);
-        });
-    }
+        }
+      }
+    };
+
+    fetchLikedArtifacts();
   }, [user]);
 
   if (loading) return <LoadingThreeDotsJumping></LoadingThreeDotsJumping>;

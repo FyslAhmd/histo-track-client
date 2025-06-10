@@ -11,20 +11,29 @@ const MyArtifacts = () => {
   const [myArtifacts, setMyArtifacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     document.title = "HistoTrack | My Artifacts";
-    if (!user) return;
-    axios
-      .get(`http://localhost:5000/myArtifacts?email=${user?.email}`)
-      .then((res) => {
-        setMyArtifacts(res.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
+    const fetchMyArtifacts = async () => {
+      if (user?.email) {
+        const idToken = await user.getIdToken();
+        await axios
+          .get(`http://localhost:5000/myArtifacts?email=${user?.email}`, {
+            headers: {
+              authorization: `Bearer ${idToken}`,
+            },
+          })
+          .then((res) => {
+            setMyArtifacts(res.data);
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.error(err);
+            setLoading(false);
+          });
+      }
+    };
+    fetchMyArtifacts();
   }, [user]);
 
   const handleDelete = (id) => {
