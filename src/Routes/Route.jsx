@@ -4,11 +4,14 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import AllArtifacts from "../Pages/AllArtifacts";
-import AddArtifacts from "../Pages/AddArtifacts";
 import MyArtifacts from "../Pages/MyArtifacts";
 import LoadingThreeDotsJumping from "../Components/LoadingThreeDotsJumping";
 import ArtifactDetails from "../Pages/ArtifactDetails";
 import LikedArtifacts from "../Pages/LikedArtifacts";
+import UpdateArtifact from "../Pages/UpdateArtifact";
+import Error404 from "../Pages/Error404";
+import AddArtifacts from "../Pages/AddArtifacts";
+import PrivateRoute from "../provider/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -29,21 +32,53 @@ export const router = createBrowserRouter([
       },
       {
         path: "/addArtifacts",
-        Component: AddArtifacts,
+        element: (
+          <PrivateRoute>
+            <AddArtifacts></AddArtifacts>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/artifactsDetails/:id",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/artifact/${params.id}`),
-        Component: ArtifactDetails,
+        element: (
+          <PrivateRoute>
+            <ArtifactDetails></ArtifactDetails>
+          </PrivateRoute>
+        ),
+        hydrateFallbackElement: (
+          <LoadingThreeDotsJumping></LoadingThreeDotsJumping>
+        ),
       },
       {
         path: "/myArtifacts",
-        Component: MyArtifacts,
+        element: (
+          <PrivateRoute>
+            <MyArtifacts></MyArtifacts>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/updateArtifact/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateArtifact></UpdateArtifact>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/artifact/${params.id}`),
+        hydrateFallbackElement: (
+          <LoadingThreeDotsJumping></LoadingThreeDotsJumping>
+        ),
       },
       {
         path: "/likedArtifacts",
-        Component: LikedArtifacts,
+        element: (
+          <PrivateRoute>
+            <LikedArtifacts></LikedArtifacts>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -57,6 +92,6 @@ export const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <h1>Error page</h1>,
+    Component: Error404,
   },
 ]);

@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HomeSlider from "../Components/HomeSlider";
 import FeaturedArtifacts from "../Components/FeaturedArtifacts";
 import ArtifactsOfTheDay from "../Components/ArtifactsOfTheDay";
 import ArtifactStats from "../Components/ArtifactStats";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "HistoTrack | Home";
+  }, []);
   return (
     <div>
       <HomeSlider></HomeSlider>

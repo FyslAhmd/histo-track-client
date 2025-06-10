@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import LoadingThreeDotsJumping from "../Components/LoadingThreeDotsJumping";
 import { use } from "react";
 import AuthContext from "../provider/AuthContext";
@@ -10,8 +10,10 @@ const MyArtifacts = () => {
   const { user } = use(AuthContext);
   const [myArtifacts, setMyArtifacts] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
+    document.title = "HistoTrack | My Artifacts";
     if (!user) return;
     axios
       .get(`http://localhost:5000/myArtifacts?email=${user?.email}`)
@@ -49,6 +51,7 @@ const MyArtifacts = () => {
                 (artifact) => artifact._id !== id
               );
               setMyArtifacts(remainingArtifacts);
+              navigate("/allArtifacts");
             }
           })
           .catch((err) => {
@@ -90,7 +93,7 @@ const MyArtifacts = () => {
                 <td>{artifact.DiscoveredAt}</td>
                 <td>{artifact.PresentLocation}</td>
                 <td className="text-center space-x-2">
-                  <Link to={`/update-artifact/${artifact._id}`}>
+                  <Link to={`/updateArtifact/${artifact._id}`}>
                     <button className="btn btn-sm bg-green-700 text-white font-bold">
                       Update
                     </button>

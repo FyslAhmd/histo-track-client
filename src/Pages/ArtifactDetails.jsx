@@ -35,12 +35,17 @@ const ArtifactDetails = () => {
   const [liked, setLiked] = useState(totalLiked);
 
   useEffect(() => {
-    if (!user) return <LoadingThreeDotsJumping></LoadingThreeDotsJumping>;
+    document.title = "HistoTrack | Artifact Details";
+    // if (!user || !artifact)
+    //   return <LoadingThreeDotsJumping></LoadingThreeDotsJumping>;
     window.scrollTo(0, 0);
     if (likedBy.includes(userEmail)) {
       setLikes(true);
     }
   }, [likedBy, userEmail]);
+
+  if (!user || !artifact)
+    return <LoadingThreeDotsJumping></LoadingThreeDotsJumping>;
 
   const handleLike = async () => {
     await axios

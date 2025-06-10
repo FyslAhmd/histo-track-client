@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import ArtifactsCard from "../Components/ArtifactsCard";
 import { use } from "react";
 import AuthContext from "../provider/AuthContext";
+import LoadingThreeDotsJumping from "../Components/LoadingThreeDotsJumping";
 
 const LikedArtifacts = () => {
   const { user } = use(AuthContext);
@@ -11,6 +12,7 @@ const LikedArtifacts = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = "HistoTrack | Liked Artifacts";
     if (user?.email) {
       axios
         .get(`http://localhost:5000/liked-artifacts?email=${user.email}`)
@@ -25,7 +27,7 @@ const LikedArtifacts = () => {
     }
   }, [user]);
 
-  if (loading) return <p className="text-center py-10">Loading...</p>;
+  if (loading) return <LoadingThreeDotsJumping></LoadingThreeDotsJumping>;
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">

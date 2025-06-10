@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React, { use, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import AuthContext from "../provider/AuthContext";
 import { toast } from "react-toastify";
@@ -7,6 +7,10 @@ const Login = () => {
   const { setUser, loginUser, signInGoogle } = use(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    document.title = "HistoTrack | Login";
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import AuthContext from "../provider/AuthContext";
 import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
@@ -8,6 +8,10 @@ const Register = () => {
   const [error, setError] = useState("");
   const { setUser, createUser, signInGoogle, updateUser } = use(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "HistoTrack | Register";
+  }, []);
 
   const handlePassword = (e) => {
     const pass = e.target.value;

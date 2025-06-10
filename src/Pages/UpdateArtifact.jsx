@@ -1,40 +1,54 @@
-import React, { use, useEffect } from "react";
-import AuthContext from "../provider/AuthContext";
 import axios from "axios";
+import React, { useEffect } from "react";
+import { useLoaderData } from "react-router";
 
-const AddArtifacts = () => {
-  const { user } = use(AuthContext);
-  const { email, displayName } = user;
+const UpdateArtifact = () => {
+  const artifact = useLoaderData();
 
   useEffect(() => {
-    document.title = "HistoTrack | Add Artifact";
+    document.title = "HistoTrack | Update Artifact";
   }, []);
+  const {
+    _id,
+    ArtifactImage,
+    ArtifactName,
+    CreatedAt,
+    DiscoveredAt,
+    DiscoveredBy,
+    HistoricalContext,
+    PresentLocation,
+    artifactType,
+    description,
+    displayName,
+    email,
+    totalLiked,
+  } = artifact;
 
-  const handleAddArtifact = (e) => {
+  const handleUpdateArtifact = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formInfo = Object.fromEntries(formData.entries());
-    const artifactsData = { ...formInfo, email, displayName, totalLiked: 0 };
-    console.log(artifactsData);
+    const artifactsData = { ...formInfo, totalLiked };
+
     //store to db
     axios
-      .post("http://localhost:5000/allArtifacts", artifactsData)
+      .patch(`http://localhost:5000/updateArtifact/${_id}`, artifactsData)
       .then((res) => {
-        if (res.data.insertedId) {
-          console.log("data inserted to db");
+        if (res.data.modifiedCount) {
+          console.log("updated");
         }
       })
-      .catch((er) => {
+      .catch((err) => {
         console.log(err);
       });
   };
   return (
     <div>
       <h1 className="text-3xl text-center text-base-content font-bold my-5">
-        Add Artifacts
+        Update Artifacts
       </h1>
       <form
-        onSubmit={handleAddArtifact}
+        onSubmit={handleUpdateArtifact}
         className="w-full p-4 grid grid-cols-1 md:grid-cols-2 gap-6"
       >
         <div>
@@ -45,6 +59,7 @@ const AddArtifacts = () => {
             name="ArtifactName"
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="Enter Artifact Name"
+            defaultValue={ArtifactName}
             required
           />
         </div>
@@ -57,6 +72,7 @@ const AddArtifacts = () => {
             name="ArtifactImage"
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="Enter Image URL"
+            defaultValue={ArtifactImage}
             required
           />
         </div>
@@ -72,6 +88,7 @@ const AddArtifacts = () => {
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="Select or enter artifact type"
             list="artifactTypes"
+            defaultValue={artifactType}
             required
           />
           <datalist id="artifactTypes">
@@ -91,6 +108,7 @@ const AddArtifacts = () => {
             name="HistoricalContext"
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="Enter Historical Context"
+            defaultValue={HistoricalContext}
             required
           />
         </div>
@@ -102,6 +120,7 @@ const AddArtifacts = () => {
             className="h-12 w-full md:w-5/6 border rounded-lg p-2 text-lg"
             placeholder="Description"
             name="description"
+            defaultValue={description}
             required
           ></textarea>
         </div>
@@ -114,6 +133,7 @@ const AddArtifacts = () => {
             name="CreatedAt"
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="e.g., 100 BC"
+            defaultValue={CreatedAt}
             required
           />
         </div>
@@ -126,6 +146,7 @@ const AddArtifacts = () => {
             name="DiscoveredAt"
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="e.g., 1799"
+            defaultValue={DiscoveredAt}
             required
           />
         </div>
@@ -138,6 +159,7 @@ const AddArtifacts = () => {
             name="DiscoveredBy"
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="Enter Discovered Person Name"
+            defaultValue={DiscoveredBy}
             required
           />
         </div>
@@ -150,6 +172,7 @@ const AddArtifacts = () => {
             name="PresentLocation"
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="Enter Present Location"
+            defaultValue={PresentLocation}
             required
           />
         </div>
@@ -160,8 +183,8 @@ const AddArtifacts = () => {
           <input
             type="text"
             name="name"
-            value={displayName}
-            disabled
+            defaultValue={displayName}
+            readOnly
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="Name"
           />
@@ -173,19 +196,19 @@ const AddArtifacts = () => {
           <input
             type="email"
             name="email"
-            value={email}
-            disabled
+            defaultValue={email}
+            readOnly
             className="border rounded-lg p-2 text-lg w-full md:w-5/6"
             placeholder="Email"
           />
         </div>
 
         <button className="btn btn-neutral text-lg py-6 md:col-span-2 mx-auto mt-4">
-          Add Artifacts
+          Update Artifacts
         </button>
       </form>
     </div>
   );
 };
 
-export default AddArtifacts;
+export default UpdateArtifact;
