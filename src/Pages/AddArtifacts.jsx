@@ -18,7 +18,7 @@ const AddArtifacts = () => {
     console.log(artifactsData);
     //store to db
     axios
-      .post("http://localhost:5000/allArtifacts", artifactsData)
+      .post("https://histotrack.vercel.app/allArtifacts", artifactsData)
       .then((res) => {
         if (res.data.insertedId) {
           console.log("data inserted to db");

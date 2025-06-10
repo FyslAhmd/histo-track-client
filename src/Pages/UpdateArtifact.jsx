@@ -32,7 +32,7 @@ const UpdateArtifact = () => {
 
     //store to db
     axios
-      .patch(`http://localhost:5000/updateArtifact/${_id}`, artifactsData)
+      .patch(`https://histotrack.vercel.app/updateArtifact/${_id}`, artifactsData)
       .then((res) => {
         if (res.data.modifiedCount) {
           console.log("updated");

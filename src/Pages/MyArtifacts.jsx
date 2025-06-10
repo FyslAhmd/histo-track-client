@@ -18,7 +18,7 @@ const MyArtifacts = () => {
       if (user?.email) {
         const idToken = await user.getIdToken();
         await axios
-          .get(`http://localhost:5000/myArtifacts?email=${user?.email}`, {
+          .get(`https://histotrack.vercel.app/myArtifacts?email=${user?.email}`, {
             headers: {
               authorization: `Bearer ${idToken}`,
             },
@@ -48,7 +48,7 @@ const MyArtifacts = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/allArtifacts/${id}`)
+          .delete(`https://histotrack.vercel.app/allArtifacts/${id}`)
           .then((res) => {
             if (res.data.deletedCount) {
               Swal.fire({

@@ -47,7 +47,7 @@ const ArtifactDetails = () => {
 
   const handleLike = async () => {
     await axios
-      .patch(`http://localhost:5000/artifact/${_id}`, {
+      .patch(`https://histotrack.vercel.app/artifact/${_id}`, {
         userEmail,
       })
       .then((res) => {
