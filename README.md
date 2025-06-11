@@ -1,12 +1,54 @@
-# React + Vite
+# 🏛️ HistoTrack - Historical Artifacts Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Website 🌐](https://histotrack1.web.app/)
 
-Currently, two official plugins are available:
+## 📌 Project Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**HistoTrack** is a full-stack web application designed to allow users to explore, manage, and share historical artifacts. It serves as a centralized digital archive for preserving cultural and historical heritage, offering CRUD operations, interactive region-based discovery, and secure authentication.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🚀 Key Features
+
+- 🔐 **User Authentication**
+  - Firebase Authentication (Google login, JWT secured)
+- 📜 **Artifacts CRUD**
+  - Authenticated users can **Add**, **Edit**, and **Delete** artifacts
+- 🗺️ **Discover by Region**
+  - Interactive map-based browsing of artifacts by geographic location
+- ❤️ **Liking System**
+  - Logged-in users can like artifacts and see their liked list
+- 🔒 **Protected Routes**
+  - Secure access to user-specific and admin-only pages
+- 🎯 **Responsive Design**
+  - Fully responsive across devices using Tailwind CSS + DaisyUI
+- 🌐 **Live Deployment**
+  - Hosted on Firebase Hosting (Free Spark Plan)
+
+---
+
+## 🧰 Technologies & Packages Used
+
+### 🌐 Frontend
+
+- **React.js**
+- **React Router DOM**
+- **Firebase Authentication**
+- **Tailwind CSS**
+- **DaisyUI**
+- **Axios**
+- **React Hook Form**
+- **React Toastify**
+- **React Icons**
+- **React Leaflet** (for map integration)
+
+### 🛠️ Backend
+
+- **Express.js**
+- **MongoDB Atlas**
+- **Firebase Admin SDK** (for token verification)
+- **CORS**
+- **Dotenv**
+- **JWT**
+- **Helmet** (for security)
+- **Mongoose**
