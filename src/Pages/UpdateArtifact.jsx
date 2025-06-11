@@ -1,9 +1,13 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import { useLoaderData } from "react-router";
+import AuthContext from "../provider/AuthContext";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const UpdateArtifact = () => {
   const artifact = useLoaderData();
+  const { user } = use(AuthContext);
 
   useEffect(() => {
     document.title = "HistoTrack | Update Artifact";
@@ -31,16 +35,38 @@ const UpdateArtifact = () => {
     const artifactsData = { ...formInfo, totalLiked };
 
     //store to db
-    axios
-      .patch(`https://histotrack.vercel.app/updateArtifact/${_id}`, artifactsData)
-      .then((res) => {
-        if (res.data.modifiedCount) {
-          console.log("updated");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+    if (user) {
+      user.getIdToken().then((token) => {
+        axios
+          .patch(`http://localhost:5000/updateArtifact/${_id}`, artifactsData, {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            if (res.data.modifiedCount) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Your Artifact has been Updated",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch((err) => {
+            if (err.response && err.response.status === 401) {
+              toast.error("Unauthorized: Please log in again.");
+            } else if (err.response && err.response.status === 403) {
+              toast.error(
+                "Forbidden: You are not allowed to update this artifact."
+              );
+            } else {
+              toast.error("Something went wrong while updating the artifact.");
+            }
+          });
       });
+    }
   };
   return (
     <div>

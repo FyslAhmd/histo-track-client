@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("https://histotrack.vercel.app/featuredArtifacts"),
+        loader: () => fetch("http://localhost:5000/featuredArtifacts"),
         hydrateFallbackElement: (
           <LoadingThreeDotsJumping></LoadingThreeDotsJumping>
         ),
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
       {
         path: "/artifactsDetails/:id",
         loader: ({ params }) =>
-          fetch(`https://histotrack.vercel.app/artifact/${params.id}`),
+          fetch(`http://localhost:5000/artifact/${params.id}`),
         element: (
           <PrivateRoute>
             <ArtifactDetails></ArtifactDetails>
@@ -67,7 +67,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://histotrack.vercel.app/artifact/${params.id}`),
+          fetch(`http://localhost:5000/artifact/${params.id}`),
         hydrateFallbackElement: (
           <LoadingThreeDotsJumping></LoadingThreeDotsJumping>
         ),

@@ -15,7 +15,7 @@ const AllArtifacts = () => {
     document.title = "HistoTrack | All Artifacts";
 
     axios
-      .get("https://histotrack.vercel.app/allArtifacts")
+      .get("http://localhost:5000/allArtifacts")
       .then((res) => {
         setArtifacts(res.data);
         setFilteredArtifacts(res.data);

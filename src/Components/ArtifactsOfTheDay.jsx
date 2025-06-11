@@ -7,7 +7,7 @@ const ArtifactsOfTheDay = () => {
   const [artifact, setArtifact] = useState(null);
 
   useEffect(() => {
-    axios.get("https://histotrack.vercel.app/dailyArtifact").then((res) => {
+    axios.get("http://localhost:5000/dailyArtifact").then((res) => {
       setArtifact(res.data);
     });
   }, []);

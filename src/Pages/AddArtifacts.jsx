@@ -1,6 +1,7 @@
 import React, { use, useEffect } from "react";
 import AuthContext from "../provider/AuthContext";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddArtifacts = () => {
   const { user } = use(AuthContext);
@@ -15,16 +16,22 @@ const AddArtifacts = () => {
     const formData = new FormData(e.target);
     const formInfo = Object.fromEntries(formData.entries());
     const artifactsData = { ...formInfo, email, displayName, totalLiked: 0 };
-    console.log(artifactsData);
     //store to db
     axios
-      .post("https://histotrack.vercel.app/allArtifacts", artifactsData)
+      .post("http://localhost:5000/allArtifacts", artifactsData)
       .then((res) => {
         if (res.data.insertedId) {
-          console.log("data inserted to db");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Artifact has been Added",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         }
+        e.target.reset();
       })
-      .catch((er) => {
+      .catch((err) => {
         console.log(err);
       });
   };

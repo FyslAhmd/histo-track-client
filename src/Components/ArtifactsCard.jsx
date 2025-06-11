@@ -15,7 +15,7 @@ const ArtifactsCard = ({ artifact }) => {
   } = artifact;
 
   return (
-    <motion.div className="card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+    <motion.div className="card bg-white shadow-md rounded-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300">
       <figure className="overflow-hidden">
         <motion.img
           src={ArtifactImage}
