@@ -25,7 +25,7 @@ const Footer = () => {
         </a>
         <a
           className="link link-hover"
-          href="https://yourportfolio.com"
+          href=""
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -33,7 +33,7 @@ const Footer = () => {
         </a>
         <a
           className="link link-hover"
-          href="https://github.com/yourusername/historical-artifacts-tracker"
+          href=""
           target="_blank"
           rel="noopener noreferrer"
         >

@@ -38,13 +38,13 @@ const AllArtifacts = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-3 items-center my-4">
-        <div></div>
-        <h1 className="text-3xl font-bold underline text-center">
+      <div className="grid grid-cols-4 md:grid-cols-3 items-center my-4">
+        <div className="hidden md:block"></div>
+        <h1 className="text-3xl font-bold underline text-center col-span-3 md:col-span-1">
           All Artifacts
         </h1>
         <div className="flex justify-end">
-          <div className="flex items-center border rounded-full w-64 px-3">
+          <div className="flex items-center border rounded-full w-30 md:w-64 px-3">
             <FaSearch className="mr-2" size={20} />
             <input
               type="text"

@@ -17,6 +17,16 @@ const HomeSlider = () => {
     speed: 5000,
     autoplaySpeed: 1,
     cssEase: "linear",
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 0.5,
+          arrows: false,
+        },
+      },
+    ],
   };
 
   const slides = [
@@ -48,7 +58,7 @@ const HomeSlider = () => {
         {slides.map((slide, index) => (
           <div key={index} className="px-2">
             <div
-              className="relative h-[60vh] bg-cover bg-center rounded-xl overflow-hidden"
+              className="relative h-[40vh] lg:h-[60vh] bg-cover bg-center rounded-xl overflow-hidden"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               <div

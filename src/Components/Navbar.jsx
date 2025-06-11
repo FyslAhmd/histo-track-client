@@ -43,7 +43,7 @@ const Navbar = () => {
     <div className="navbar bg-base-100 border-l border-r border-b border-white shadow-sm rounded-xl">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="lg:hidden mr-2">
+          <div tabIndex={0} role="button" className="md:hidden mr-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -68,13 +68,13 @@ const Navbar = () => {
         </div>
         <Link className="md:text-xl font-bold flex gap-3 cursor-pointer" to="/">
           <img
-            className="h-7 md:h-14 rounded-md md:rounded-lg"
+            className="h-10 md:h-14 rounded-md md:rounded-lg"
             src={navImg}
             alt=""
           />
         </Link>
       </div>
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden md:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">

@@ -18,11 +18,14 @@ const MyArtifacts = () => {
       if (user?.email) {
         const idToken = await user.getIdToken();
         await axios
-          .get(`https://histotrack.vercel.app/myArtifacts?email=${user?.email}`, {
-            headers: {
-              authorization: `Bearer ${idToken}`,
-            },
-          })
+          .get(
+            `https://histotrack.vercel.app/myArtifacts?email=${user?.email}`,
+            {
+              headers: {
+                authorization: `Bearer ${idToken}`,
+              },
+            }
+          )
           .then((res) => {
             setMyArtifacts(res.data);
             setLoading(false);
@@ -84,24 +87,67 @@ const MyArtifacts = () => {
           </p>
         </div>
       ) : (
-        <table className="table">
-          <thead>
-            <tr className="text-lg bg-base-200 text-base-content">
-              <th>Artifact Name</th>
-              <th>Type</th>
-              <th>Discovered At</th>
-              <th>Location</th>
-              <th className="text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
+        <>
+          <div className="hidden md:block">
+            <table className="table w-full">
+              <thead>
+                <tr className="text-lg bg-base-200 text-base-content">
+                  <th>Artifact Name</th>
+                  <th>Type</th>
+                  <th>Discovered At</th>
+                  <th>Location</th>
+                  <th className="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {myArtifacts.map((artifact) => (
+                  <tr key={artifact._id}>
+                    <td className="font-semibold">{artifact.ArtifactName}</td>
+                    <td>{artifact.artifactType}</td>
+                    <td>{artifact.DiscoveredAt}</td>
+                    <td>{artifact.PresentLocation}</td>
+                    <td className="text-center space-x-2">
+                      <Link to={`/updateArtifact/${artifact._id}`}>
+                        <button className="btn btn-sm bg-green-700 text-white font-bold">
+                          Update
+                        </button>
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(artifact._id)}
+                        className="btn btn-sm bg-red-700 text-white font-bold"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="md:hidden space-y-4">
             {myArtifacts.map((artifact) => (
-              <tr key={artifact._id}>
-                <td className="font-semibold">{artifact.ArtifactName}</td>
-                <td>{artifact.artifactType}</td>
-                <td>{artifact.DiscoveredAt}</td>
-                <td>{artifact.PresentLocation}</td>
-                <td className="text-center space-x-2">
+              <div
+                key={artifact._id}
+                className="bg-base-200 p-4 rounded shadow text-base-content"
+              >
+                <p>
+                  <span className="font-bold">Name:</span>{" "}
+                  {artifact.ArtifactName}
+                </p>
+                <p>
+                  <span className="font-bold">Type:</span>{" "}
+                  {artifact.artifactType}
+                </p>
+                <p>
+                  <span className="font-bold">Discovered At:</span>{" "}
+                  {artifact.DiscoveredAt}
+                </p>
+                <p>
+                  <span className="font-bold">Location:</span>{" "}
+                  {artifact.PresentLocation}
+                </p>
+                <div className="mt-2 space-x-2">
                   <Link to={`/updateArtifact/${artifact._id}`}>
                     <button className="btn btn-sm bg-green-700 text-white font-bold">
                       Update
@@ -113,11 +159,11 @@ const MyArtifacts = () => {
                   >
                     Delete
                   </button>
-                </td>
-              </tr>
+                </div>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </>
       )}
     </div>
   );
