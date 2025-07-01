@@ -7,12 +7,14 @@ import LoadingThreeDotsJumping from "../Components/LoadingThreeDotsJumping";
 const Root = () => {
   const navigation = useNavigation();
   return (
-    <div className="px-1 md:w-11/12 mx-auto">
+    <div className="px-1 mx-auto">
       <Navbar></Navbar>
       {navigation.state === "loading" && (
         <LoadingThreeDotsJumping></LoadingThreeDotsJumping>
       )}
-      <Outlet></Outlet>
+      <div className="md:max-w-7xl mx-auto">
+        <Outlet></Outlet>
+      </div>
       <Footer></Footer>
     </div>
   );

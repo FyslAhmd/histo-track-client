@@ -20,7 +20,33 @@ const Navbar = () => {
       });
   };
 
-  const links = (
+  const beforeLinks = (
+    <>
+      <NavLink className="text-base md:text-lg font-medium md:mr-4 p-2" to="/">
+        Home
+      </NavLink>
+      <NavLink
+        className="text-base md:text-lg font-medium md:mr-2 p-2"
+        to="/allArtifacts"
+      >
+        All Artifacts
+      </NavLink>
+      <NavLink
+        className="text-base md:text-lg font-medium md:mr-2 p-2"
+        to="/about"
+      >
+        About Us
+      </NavLink>
+      <NavLink
+        className="text-base md:text-lg font-medium md:mr-2 p-2"
+        to="/contact"
+      >
+        Contact
+      </NavLink>
+    </>
+  );
+
+  const afterLinks = (
     <>
       <NavLink className="text-base md:text-lg font-medium md:mr-4 p-2" to="/">
         Home
@@ -40,7 +66,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 border-b border-white rounded-xl">
+    <div className="navbar bg-white sticky top-0 z-[100] md:max-w-7xl mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="md:hidden mr-2">
@@ -63,7 +89,7 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            {links}
+            {user ? afterLinks : beforeLinks}
           </ul>
         </div>
         <Link className="md:text-xl font-bold flex gap-3 cursor-pointer" to="/">
@@ -75,7 +101,9 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden md:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
+        <ul className="menu menu-horizontal px-1">
+          {user ? afterLinks : beforeLinks}
+        </ul>
       </div>
       <div className="navbar-end">
         {user ? (

@@ -19,7 +19,7 @@ const LikedArtifacts = () => {
         try {
           const idToken = await user.getIdToken();
           const res = await axios.get(
-            `https://histotrack.vercel.app/liked-artifacts?email=${user.email}`,
+            `http://localhost:5000/liked-artifacts?email=${user.email}`,
             {
               headers: {
                 authorization: `Bearer ${idToken}`,

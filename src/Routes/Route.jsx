@@ -12,6 +12,8 @@ import UpdateArtifact from "../Pages/UpdateArtifact";
 import Error404 from "../Pages/Error404";
 import AddArtifacts from "../Pages/AddArtifacts";
 import PrivateRoute from "../provider/PrivateRoute";
+import About from "../Pages/About";
+import Contact from "../Pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -21,7 +23,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("https://histotrack.vercel.app/featuredArtifacts"),
+        loader: () => fetch("http://localhost:5000/featuredArtifacts"),
         hydrateFallbackElement: (
           <LoadingThreeDotsJumping></LoadingThreeDotsJumping>
         ),
@@ -41,7 +43,7 @@ export const router = createBrowserRouter([
       {
         path: "/artifactsDetails/:id",
         loader: ({ params }) =>
-          fetch(`https://histotrack.vercel.app/artifact/${params.id}`),
+          fetch(`http://localhost:5000/artifact/${params.id}`),
         element: (
           <PrivateRoute>
             <ArtifactDetails></ArtifactDetails>
@@ -67,7 +69,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://histotrack.vercel.app/artifact/${params.id}`),
+          fetch(`http://localhost:5000/artifact/${params.id}`),
         hydrateFallbackElement: (
           <LoadingThreeDotsJumping></LoadingThreeDotsJumping>
         ),
@@ -79,6 +81,14 @@ export const router = createBrowserRouter([
             <LikedArtifacts></LikedArtifacts>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/about",
+        Component: About,
+      },
+      {
+        path: "/contact",
+        Component: Contact,
       },
       {
         path: "/login",
