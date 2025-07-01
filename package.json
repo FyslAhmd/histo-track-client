@@ -19,12 +19,17 @@
     "react-countup": "^6.5.3",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
+    "react-images": "^1.2.0-beta.7",
+    "react-masonry-css": "^1.0.16",
+    "react-photo-album": "^3.1.0",
+    "react-photo-gallery": "^8.0.0",
     "react-router": "^7.6.2",
     "react-slick": "^0.30.3",
     "react-toastify": "^11.0.5",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.22.0",
-    "tailwindcss": "^4.1.8"
+    "tailwindcss": "^4.1.8",
+    "yet-another-react-lightbox": "^3.23.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

@@ -31,9 +31,9 @@ const ArtifactsOfTheDay = () => {
   } = artifact;
 
   return (
-    <section className="my-20">
+    <section className="">
       <motion.h2
-        className="text-3xl font-bold text-center underline mb-8"
+        className="text-3xl font-bold text-center mt-20 mb-8"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

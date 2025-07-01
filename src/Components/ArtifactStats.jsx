@@ -9,13 +9,13 @@ import locationIcon from "../assets/service4.png";
 const ArtifactStats = () => {
   return (
     <motion.section
-      className="my-20"
+      className="mb-8"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       viewport={{ once: true }}
     >
-      <h2 className="text-3xl text-center font-bold underline mb-4">
+      <h2 className="text-3xl text-center font-bold mt-20 mb-2">
         Platform Statistics
       </h2>
       <p className="text-gray-600 font-medium text-center mb-8">

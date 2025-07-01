@@ -6,6 +6,7 @@ import slider1 from "../assets/slider1.jpg";
 import slider2 from "../assets/slider2.jpg";
 import slider3 from "../assets/slider3.jpg";
 import slider4 from "../assets/slider4.webp";
+import { Link } from "react-router";
 
 const HomeSlider = () => {
   const settings = {
@@ -67,9 +68,12 @@ const HomeSlider = () => {
               >
                 <h2 className="text-4xl font-bold mb-4">{slide.title}</h2>
                 <p className="mb-6 max-w-xl">{slide.text}</p>
-                <button className="bg-white text-black font-bold px-6 py-2 rounded hover:bg-gray-200">
+                <Link
+                  to="/allArtifacts"
+                  className="bg-white text-black font-bold px-6 py-2 rounded hover:bg-gray-200"
+                >
                   Explore More
-                </button>
+                </Link>
               </div>
             </div>
           </div>

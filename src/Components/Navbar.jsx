@@ -63,6 +63,18 @@ const Navbar = () => {
       >
         Add Artifacts
       </NavLink>
+      <NavLink
+        className="text-base md:text-lg font-medium md:mr-2 p-2"
+        to="/about"
+      >
+        About Us
+      </NavLink>
+      <NavLink
+        className="text-base md:text-lg font-medium md:mr-2 p-2"
+        to="/contact"
+      >
+        Contact
+      </NavLink>
     </>
   );
   return (

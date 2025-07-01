@@ -3,6 +3,7 @@ import HomeSlider from "../Components/HomeSlider";
 import FeaturedArtifacts from "../Components/FeaturedArtifacts";
 import ArtifactsOfTheDay from "../Components/ArtifactsOfTheDay";
 import ArtifactStats from "../Components/ArtifactStats";
+import Newsletter from "../Components/Newsletter";
 
 const Home = () => {
   useEffect(() => {
@@ -14,6 +15,7 @@ const Home = () => {
       <FeaturedArtifacts></FeaturedArtifacts>
       <ArtifactsOfTheDay></ArtifactsOfTheDay>
       <ArtifactStats></ArtifactStats>
+      <Newsletter></Newsletter>
     </div>
   );
 };
