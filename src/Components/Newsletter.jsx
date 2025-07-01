@@ -23,7 +23,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="bg-green-50 py-12 px-4 sm:px-6 lg:px-8 rounded-lg max-w-4xl mx-auto my-16 shadow-md">
+    <section className="bg-green-50 py-12 px-4 sm:px-6 lg:px-8 rounded-lg  mx-auto my-16 shadow-md">
       <h2 className="text-3xl font-semibold text-center text-green-800 mb-4">
         Subscribe to our Newsletter
       </h2>

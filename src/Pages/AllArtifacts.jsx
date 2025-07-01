@@ -8,25 +8,29 @@ const AllArtifacts = () => {
   const [artifacts, setArtifacts] = useState([]);
   const [filteredArtifacts, setFilteredArtifacts] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [sortOption, setSortOption] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // Load data when component mounts or sortOption changes
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "HistoTrack | All Artifacts";
 
+    setLoading(true);
     axios
-      .get("http://localhost:5000/allArtifacts")
+      .get(`https://histotrack.vercel.app/allArtifacts?sort=${sortOption}`)
       .then((res) => {
         setArtifacts(res.data);
-        setFilteredArtifacts(res.data);
+        setFilteredArtifacts(res.data); // will be filtered by searchText later
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setLoading(false);
       });
-  }, []);
+  }, [sortOption]);
 
+  // Filter artifacts by search text
   useEffect(() => {
     const filtered = artifacts.filter((artifact) =>
       artifact.ArtifactName.toLowerCase().includes(searchText.toLowerCase())
@@ -37,23 +41,31 @@ const AllArtifacts = () => {
   if (loading) return <LoadingThreeDotsJumping />;
 
   return (
-    <div>
-      <div className="grid grid-cols-4 md:grid-cols-3 items-center my-4">
-        <div className="hidden md:block"></div>
-        <h1 className="text-3xl font-bold underline text-center col-span-3 md:col-span-1">
-          All Artifacts
-        </h1>
-        <div className="flex justify-end">
-          <div className="flex items-center border rounded-full w-30 md:w-64 px-3">
-            <FaSearch className="mr-2" size={20} />
-            <input
-              type="text"
-              placeholder="Search artifacts by name..."
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              className="h-8 w-full outline-none"
-            />
-          </div>
+    <div className="px-4">
+      <div className="flex flex-col lg:flex-row items-center justify-between gap-4 my-6">
+        <div className="w-full lg:w-1/4 relative">
+          <FaSearch className="absolute top-3 left-3 text-gray-500" />
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="w-full pl-10 pr-4 py-2 border rounded-full outline-none focus:border-green-600 transition-all"
+          />
+        </div>
+
+        <div className="w-full lg:w-1/4">
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="w-full border rounded-full px-4 py-2 outline-none focus:border-green-600"
+          >
+            <option value="">Sort by</option>
+            <option value="name-asc">Name (A → Z)</option>
+            <option value="name-desc">Name (Z → A)</option>
+            <option value="likes-desc">Likes (High → Low)</option>
+            <option value="likes-asc">Likes (Low → High)</option>
+          </select>
         </div>
       </div>
 
