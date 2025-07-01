@@ -38,7 +38,7 @@ const UpdateArtifact = () => {
     if (user) {
       user.getIdToken().then((token) => {
         axios
-          .patch(`http://localhost:5000/updateArtifact/${_id}`, artifactsData, {
+          .patch(`https://histotrack.vercel.app/updateArtifact/${_id}`, artifactsData, {
             headers: {
               authorization: `Bearer ${token}`,
             },
